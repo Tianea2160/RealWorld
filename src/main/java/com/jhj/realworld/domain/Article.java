@@ -38,6 +38,9 @@ public class Article extends TimeExtend{
     @JoinColumn(name = "comment_id")//단방향 연결
     private List<Comment> comments = new ArrayList<>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "article")
+    private List<Like> likes = new ArrayList<>();
+
     @Builder
     public Article(String slug, String description, String body, Member member) {
         this.slug = slug;

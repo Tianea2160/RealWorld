@@ -40,6 +40,7 @@ public class Member extends TimeExtend {
 
     @OneToMany(fetch = FetchType.LAZY) // 단방향
     private List<Member> followers = new ArrayList<>();
+
     //빌더 패턴으로만 객체 생성을 유도(생성)
     @Builder
     public Member(String email, String token, String name, Role role) {

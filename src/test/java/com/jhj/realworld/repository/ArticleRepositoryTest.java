@@ -26,7 +26,6 @@ class ArticleRepositoryTest {
     void 게시물을_작성하고_잘_추가되는지_확인하기() throws Exception {
         //given
         String name = "jhj";
-        String nickname = "jhj";
         String token = "qwer1234";
         String email = "qwer1234@example.com";
 
@@ -41,6 +40,7 @@ class ArticleRepositoryTest {
         String slug = "hello world!";
         String description = "this is testing description";
         String body = "Life is short, and python is good";
+
         Article article = Article.builder()
                 .slug(slug)
                 .description(description)
