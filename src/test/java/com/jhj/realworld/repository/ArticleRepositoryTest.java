@@ -1,8 +1,8 @@
 package com.jhj.realworld.repository;
 
-import com.jhj.realworld.domain.Article;
-import com.jhj.realworld.domain.Member;
-import com.jhj.realworld.domain.Role;
+import com.jhj.realworld.domain.article.Article;
+import com.jhj.realworld.domain.member.Member;
+import com.jhj.realworld.domain.member.Role;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

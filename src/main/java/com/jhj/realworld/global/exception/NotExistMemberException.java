@@ -1,4 +1,4 @@
-package com.jhj.realworld.exception;
+package com.jhj.realworld.global.exception;
 
 public class NotExistMemberException extends RuntimeException{
 }

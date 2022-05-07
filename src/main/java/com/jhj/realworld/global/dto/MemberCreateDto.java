@@ -1,4 +1,4 @@
-package com.jhj.realworld.dto;
+package com.jhj.realworld.global.dto;
 
 
 import com.sun.istack.NotNull;

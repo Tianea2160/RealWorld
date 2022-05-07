@@ -1,22 +1,18 @@
 package com.jhj.realworld.repository;
 
-import com.jhj.realworld.domain.Article;
-import com.jhj.realworld.domain.Comment;
-import com.jhj.realworld.domain.Member;
-import com.jhj.realworld.domain.Role;
+import com.jhj.realworld.domain.article.Article;
+import com.jhj.realworld.domain.comment.Comment;
+import com.jhj.realworld.domain.member.Member;
+import com.jhj.realworld.domain.member.Role;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.time.LocalDate;
 import java.util.logging.Logger;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)

@@ -1,12 +1,11 @@
-package com.jhj.realworld.service;
+package com.jhj.realworld.domain.member.service;
 
 
-import com.jhj.realworld.domain.Member;
-import com.jhj.realworld.dto.MemberCreateDto;
-import com.jhj.realworld.dto.MemberResponseDto;
-import com.jhj.realworld.dto.MemberUpdateDto;
-import com.jhj.realworld.exception.NotExistMemberException;
-import com.jhj.realworld.repository.MemberRepository;
+import com.jhj.realworld.domain.member.Member;
+import com.jhj.realworld.global.dto.MemberCreateDto;
+import com.jhj.realworld.global.dto.MemberResponseDto;
+import com.jhj.realworld.global.dto.MemberUpdateDto;
+import com.jhj.realworld.global.exception.NotExistMemberException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional
 public class MemberService {
-    private final MemberRepository memberRepository;
+    private final Member.MemberRepository memberRepository;
 
     //create
     public Long join(MemberCreateDto dto){

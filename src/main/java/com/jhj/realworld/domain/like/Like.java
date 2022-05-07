@@ -1,5 +1,7 @@
-package com.jhj.realworld.domain;
+package com.jhj.realworld.domain.like;
 
+import com.jhj.realworld.domain.article.Article;
+import com.jhj.realworld.domain.member.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

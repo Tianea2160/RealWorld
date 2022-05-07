@@ -1,10 +1,14 @@
-package com.jhj.realworld.domain;
+package com.jhj.realworld.domain.article;
 
+import com.jhj.realworld.domain.comment.Comment;
+import com.jhj.realworld.domain.like.Like;
+import com.jhj.realworld.domain.tag.Tag;
+import com.jhj.realworld.domain.TimeExtend;
+import com.jhj.realworld.domain.member.Member;
 import com.sun.istack.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import net.bytebuddy.matcher.FilterableList;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,7 +17,7 @@ import java.util.List;
 @Getter
 @Entity
 @NoArgsConstructor
-public class Article extends TimeExtend{
+public class Article extends TimeExtend {
     @Id @GeneratedValue
     @Column(name = "article_id")
     private Long id;

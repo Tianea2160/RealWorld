@@ -1,20 +1,22 @@
-package com.jhj.realworld.domain;
+package com.jhj.realworld.domain.member;
 
 
+import com.jhj.realworld.domain.article.Article;
+import com.jhj.realworld.domain.TimeExtend;
 import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-@Getter
-@Entity
+@Getter @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member extends TimeExtend {
     @Id
@@ -28,7 +30,7 @@ public class Member extends TimeExtend {
 
     @NotNull
     @Column(unique = true)
-    private String email;
+    private String email;//이메일을 통해서 사용자를 검색할 것이다.
 
     @NotNull
     private String token;
@@ -55,5 +57,12 @@ public class Member extends TimeExtend {
         this.name = name;
         this.email = email;
         this.token = token;
+    }
+
+    @Repository
+    public static interface MemberRepository extends JpaRepository<Member, Long> {
+        List<Member> findAll();
+        Optional<Member> findByEmail(String email);
+        Optional<Member> findById(Long memberId);
     }
 }

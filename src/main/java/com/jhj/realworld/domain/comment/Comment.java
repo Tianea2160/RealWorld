@@ -1,5 +1,7 @@
-package com.jhj.realworld.domain;
+package com.jhj.realworld.domain.comment;
 
+import com.jhj.realworld.domain.TimeExtend;
+import com.jhj.realworld.domain.member.Member;
 import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -10,7 +12,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @NoArgsConstructor(access= AccessLevel.PROTECTED)
-public class Comment extends TimeExtend{
+public class Comment extends TimeExtend {
     @Id @GeneratedValue
     @Column(name = "comment_id")
     private Long id;

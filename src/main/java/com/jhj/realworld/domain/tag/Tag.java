@@ -1,4 +1,4 @@
-package com.jhj.realworld.domain;
+package com.jhj.realworld.domain.tag;
 
 
 import com.sun.istack.NotNull;

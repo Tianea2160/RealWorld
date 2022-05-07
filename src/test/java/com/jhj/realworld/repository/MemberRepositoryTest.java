@@ -1,7 +1,7 @@
 package com.jhj.realworld.repository;
 
-import com.jhj.realworld.domain.Member;
-import com.jhj.realworld.domain.Role;
+import com.jhj.realworld.domain.member.Member;
+import com.jhj.realworld.domain.member.Role;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,11 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.logging.Logger;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest

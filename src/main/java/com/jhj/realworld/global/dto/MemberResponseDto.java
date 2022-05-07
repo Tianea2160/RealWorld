@@ -1,12 +1,10 @@
-package com.jhj.realworld.dto;
+package com.jhj.realworld.global.dto;
 
-import com.jhj.realworld.domain.Member;
-import com.sun.istack.NotNull;
+import com.jhj.realworld.domain.member.Member;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import java.time.LocalDate;
 
 @Getter
