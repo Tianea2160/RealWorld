@@ -2,11 +2,15 @@ package com.jhj.realworld.domain.member.service;
 
 
 import com.jhj.realworld.domain.member.Member;
+import com.jhj.realworld.domain.member.Role;
+import com.jhj.realworld.domain.member.repository.MemberRepository;
 import com.jhj.realworld.global.dto.MemberCreateDto;
 import com.jhj.realworld.global.dto.MemberResponseDto;
+import com.jhj.realworld.global.dto.MemberSignInDto;
 import com.jhj.realworld.global.dto.MemberUpdateDto;
 import com.jhj.realworld.global.exception.NotExistMemberException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,14 +18,17 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional
 public class MemberService {
-    private final Member.MemberRepository memberRepository;
-
+    private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
     //create
     public Long join(MemberCreateDto dto){
         Member member = Member.builder()
-                .name(dto.getName())
+                .name(dto.getUsername())
+                .role(Role.USER)
                 .email(dto.getEmail())
                 .build();
+
+        member.setPassword(passwordEncoder.encode(dto.getPassword()));
         memberRepository.save(member);
         return member.getId();
     }
@@ -58,4 +65,5 @@ public class MemberService {
                 .orElseThrow(NotExistMemberException::new);
         memberRepository.delete(member);
     }
+
 }

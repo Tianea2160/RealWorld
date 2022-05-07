@@ -34,7 +34,7 @@ class CommentRepositoryTest {
         Member member = Member.builder()
                 .name(name)
                 .email(email)
-                .token(token)
+                .password(token)
                 .role(Role.USER)
                 .build();
         em.persist(member); //member create

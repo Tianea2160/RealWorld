@@ -3,7 +3,7 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver  #h2 드라이버 설정
-    url: jdbc:h2:mem:test
+    url: jdbc:h2:~/test
 
   h2:
     console:
@@ -11,7 +11,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
-    show-sql: false
+    show-sql: true
     properties:
       hibernate:
         format_sql: true

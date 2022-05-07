@@ -16,7 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Getter @Entity
+@Getter
+@Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member extends TimeExtend {
     @Id
@@ -25,16 +26,17 @@ public class Member extends TimeExtend {
     private Long id;
 
     @NotNull
-    @Column(name = "member_name")
+    @Column(name = "member_name", unique = true)
     private String name;
+
+    @NotNull
+    private String password;
 
     @NotNull
     @Column(unique = true)
     private String email;//이메일을 통해서 사용자를 검색할 것이다.
 
-    @NotNull
-    private String token;
-
+    @Enumerated(value = EnumType.STRING)
     private Role role;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
@@ -45,24 +47,25 @@ public class Member extends TimeExtend {
 
     //빌더 패턴으로만 객체 생성을 유도(생성)
     @Builder
-    public Member(String email, String token, String name, Role role) {
-        this.email = email;
-        this.token = token;
+    public Member(String name, String password, String email, Role role) {
         this.name = name;
+        this.password = password;
+        this.email = email;
         this.role = role;
     }
 
     // update
-    public void update(String name, String token, String email) {
-        this.name = name;
+    public void update(String username, String password, String email) {
+        this.name = username;
+        this.password = password;
         this.email = email;
-        this.token = token;
     }
 
-    @Repository
-    public static interface MemberRepository extends JpaRepository<Member, Long> {
-        List<Member> findAll();
-        Optional<Member> findByEmail(String email);
-        Optional<Member> findById(Long memberId);
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

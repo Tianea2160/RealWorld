@@ -29,13 +29,13 @@ class MemberRepositoryTest {
     void member생성_및_추가() throws Exception {
         //given
         String name = "jhj";
-        String token = "qwer1234";
+        String password = "qwer1234";
         String email = "qwer1234@example.com";
 
         Member member = Member.builder()
                 .name(name)
                 .email(email)
-                .token(token)
+                .password(password)
                 .role(Role.USER)
                 .build();
         //when
@@ -56,27 +56,27 @@ class MemberRepositoryTest {
     void follow기능_구현하기위해서_자기자신에_대해서_연관관계_매핑시도() throws Exception {
         //given
         String name = "jhj";
-        String token = "qwer1234";
+        String password = "qwer1234";
         String email = "@example.com";
 
         Member member1 = Member.builder()
                 .name("111")
                 .email("111" + email)
-                .token(token)
+                .password(password)
                 .role(Role.USER)
                 .build();
 
         Member member2 = Member.builder()
                 .name("222")
                 .email("222" + email)
-                .token(token)
+                .password(password)
                 .role(Role.USER)
                 .build();
 
         Member member3 = Member.builder()
                 .name("333")
                 .email("333" + email)
-                .token(token)
+                .password(password)
                 .role(Role.USER)
                 .build();
 
@@ -93,7 +93,7 @@ class MemberRepositoryTest {
 
         Assertions.assertThat(saved.getFollowers().size()).isEqualTo(2);
         Member updateOne = saved.getFollowers().get(0);
-        updateOne.update("444", token, email);
+        updateOne.update("444", password, email);
 
         Member res = em.find(Member.class, member2.getId());
         Assertions.assertThat(res.getName()).isEqualTo("444");
