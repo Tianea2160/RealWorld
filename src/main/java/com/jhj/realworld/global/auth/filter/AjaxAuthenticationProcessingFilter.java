@@ -17,7 +17,7 @@ public class AjaxAuthenticationProcessingFilter extends AbstractAuthenticationPr
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public AjaxAuthenticationProcessingFilter() {
-        super(new AntPathRequestMatcher("/api/login"));
+        super(new AntPathRequestMatcher("/api/members/login"));
     }
 
     @Override

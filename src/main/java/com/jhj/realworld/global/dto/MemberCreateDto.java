@@ -12,4 +12,6 @@ public class MemberCreateDto {
     private String password;
     private String username;
     private String email;
+    private String bio;
+    private String img;
 }

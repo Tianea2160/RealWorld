@@ -12,14 +12,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member extends TimeExtend {
+public class Member extends TimeExtend implements Comparator<Member> {
     @Id
     @GeneratedValue
     @Column(name = "member_id")
@@ -33,8 +31,12 @@ public class Member extends TimeExtend {
     private String password;
 
     @NotNull
-    @Column(unique = true)
-    private String email;//이메일을 통해서 사용자를 검색할 것이다.
+    @Column
+    private String email;
+
+    private String bio;
+
+    private String img;
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
@@ -47,18 +49,20 @@ public class Member extends TimeExtend {
 
     //빌더 패턴으로만 객체 생성을 유도(생성)
     @Builder
-    public Member(String name, String password, String email, Role role) {
+    public Member(String name, String password, String email, String bio, String img, Role role) {
         this.name = name;
         this.password = password;
         this.email = email;
+        this.bio = bio;
+        this.img = img;
         this.role = role;
     }
 
     // update
-    public void update(String username, String password, String email) {
-        this.name = username;
-        this.password = password;
+    public void update(String email, String bio, String img){
         this.email = email;
+        this.bio = bio;
+        this.img = img;
     }
 
     public String getPassword() {
@@ -67,5 +71,11 @@ public class Member extends TimeExtend {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public int compare(Member o1, Member o2) {
+        if(Objects.equals(o1.id, o2.id)) return 0;
+        return o1.id > o2.id ? 1 :-1;
     }
 }
