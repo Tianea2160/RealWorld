@@ -4,20 +4,15 @@ package com.jhj.realworld.domain.member.controller;
 import com.jhj.realworld.domain.member.Member;
 import com.jhj.realworld.domain.member.service.MemberService;
 import com.jhj.realworld.global.auth.dto.SessionMember;
-import com.jhj.realworld.global.dto.MemberCreateDto;
-import com.jhj.realworld.global.dto.MemberUpdateDto;
+import com.jhj.realworld.domain.member.dto.MemberCreateDto;
+import com.jhj.realworld.domain.member.dto.MemberUpdateDto;
 import com.jhj.realworld.global.dto.Profile;
 import com.jhj.realworld.global.exception.NotExistMemberException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
 
 @Slf4j
 @RestController

@@ -2,12 +2,11 @@ package com.jhj.realworld.global.auth.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jhj.realworld.global.auth.token.AjaxAuthenticationToken;
-import com.jhj.realworld.global.dto.MemberLoginDto;
+import com.jhj.realworld.domain.member.dto.MemberLoginDto;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

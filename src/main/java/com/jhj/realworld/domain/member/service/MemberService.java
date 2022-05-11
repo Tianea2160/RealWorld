@@ -3,22 +3,19 @@ package com.jhj.realworld.domain.member.service;
 
 import com.jhj.realworld.domain.member.Member;
 import com.jhj.realworld.domain.member.Role;
+import com.jhj.realworld.domain.member.dto.MemberCreateDto;
+import com.jhj.realworld.domain.member.dto.MemberUpdateDto;
 import com.jhj.realworld.domain.member.repository.MemberRepository;
-import com.jhj.realworld.global.auth.dto.MemberContext;
 import com.jhj.realworld.global.auth.dto.SessionMember;
 import com.jhj.realworld.global.dto.*;
 import com.jhj.realworld.global.exception.AlreadyMemberExistException;
 import com.jhj.realworld.global.exception.NotExistMemberException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.security.Security;
 
 @Slf4j
 @Service

@@ -16,9 +16,9 @@ import java.time.LocalDateTime;
 public abstract class TimeExtend {
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime created;
+    private LocalDateTime createdAt;
 
     @LastModifiedDate
     @Column(updatable = true)
-    private LocalDateTime modified;
+    private LocalDateTime modifiedAt;
 }

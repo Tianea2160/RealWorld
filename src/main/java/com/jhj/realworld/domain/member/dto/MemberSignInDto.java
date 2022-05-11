@@ -1,4 +1,4 @@
-package com.jhj.realworld.global.dto;
+package com.jhj.realworld.domain.member.dto;
 
 import lombok.Data;
 

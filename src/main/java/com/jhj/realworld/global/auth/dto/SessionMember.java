@@ -1,7 +1,6 @@
 package com.jhj.realworld.global.auth.dto;
 
 import com.jhj.realworld.domain.member.Member;
-import com.jhj.realworld.global.dto.CurrentMemberDto;
 import lombok.Getter;
 import lombok.Setter;
 

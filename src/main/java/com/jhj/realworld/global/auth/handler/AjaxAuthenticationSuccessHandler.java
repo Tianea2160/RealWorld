@@ -2,7 +2,7 @@ package com.jhj.realworld.global.auth.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jhj.realworld.domain.member.Member;
-import com.jhj.realworld.global.dto.MemberLoginDto;
+import com.jhj.realworld.domain.member.dto.MemberLoginDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
