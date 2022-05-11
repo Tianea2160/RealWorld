@@ -1,6 +1,7 @@
 package com.jhj.realworld.repository;
 
 import com.jhj.realworld.domain.article.Article;
+import com.jhj.realworld.domain.articletag.ArticleTag;
 import com.jhj.realworld.domain.member.Member;
 import com.jhj.realworld.domain.member.Role;
 import com.jhj.realworld.domain.tag.Tag;
@@ -61,11 +62,18 @@ class TagRepositoryTest {
         em.persist(tag1);// tag에 대해서 저장을 해야함
         em.persist(tag2);
 
-        article.getTags().add(tag1);
-        article.getTags().add(tag2);
+
+        ArticleTag articleTag1 = ArticleTag.create(article, tag1);
+        ArticleTag articleTag2 = ArticleTag.create(article, tag2);
+        em.persist(articleTag1);
+        em.persist(articleTag2);
+
+        article.getArticleTags().add(articleTag1);
+        article.getArticleTags().add(articleTag2);
+
         //then
         Article findArticle = em.find(Article.class, article.getId());
-        assertThat(findArticle.getTags().size()).isEqualTo(2);
+        assertThat(findArticle.getArticleTags().size()).isEqualTo(2);
 
         Tag findTag1 = em.find(Tag.class, tag1.getId());
         Tag findTag2 = em.find(Tag.class, tag2.getId());

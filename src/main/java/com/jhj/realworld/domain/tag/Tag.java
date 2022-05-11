@@ -18,10 +18,14 @@ public class Tag {
     @Column(name = "tag_id")
     private Long id;
 
-    @NotNull
+    @Column(unique = true, nullable = false)
     private String content;
 
     public Tag(String content) {
+        this.content = content;
+    }
+
+    public void setContent(String content) {
         this.content = content;
     }
 }

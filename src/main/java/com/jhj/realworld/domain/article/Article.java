@@ -1,6 +1,7 @@
 package com.jhj.realworld.domain.article;
 
 import com.jhj.realworld.domain.article.dto.ArticleUpdateDto;
+import com.jhj.realworld.domain.articletag.ArticleTag;
 import com.jhj.realworld.domain.comment.Comment;
 import com.jhj.realworld.domain.like.Like;
 import com.jhj.realworld.domain.tag.Tag;
@@ -35,8 +36,8 @@ public class Article extends TimeExtend {
     @NotNull
     private Long view;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Tag> tags = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "article")
+    private List<ArticleTag> articleTags = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")

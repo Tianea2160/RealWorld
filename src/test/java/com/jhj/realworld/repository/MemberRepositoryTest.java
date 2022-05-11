@@ -45,8 +45,8 @@ class MemberRepositoryTest {
         Member findOne = em.find(Member.class, member.getId());
 
         log.info("id: " + member.getId());
-        log.info("created: " + member.getCreated());
-        log.info("modified: " + member.getModified());
+        log.info("created: " + member.getCreatedAt());
+        log.info("modified: " + member.getModifiedAt());
         Assertions.assertThat(findOne).isEqualTo(member);
         Assertions.assertThat(findOne.getId()).isEqualTo(member.getId());
         Assertions.assertThat(findOne.getRole()).isEqualTo(member.getRole());
@@ -93,10 +93,17 @@ class MemberRepositoryTest {
 
         Assertions.assertThat(saved.getFollowers().size()).isEqualTo(2);
         Member updateOne = saved.getFollowers().get(0);
-        updateOne.update("444", password, email);
+
+        String newEmail = "new" + email;
+        String bio = "bio";
+
+        updateOne.update(newEmail, bio, null);
 
         Member res = em.find(Member.class, member2.getId());
-        Assertions.assertThat(res.getName()).isEqualTo("444");
+        Assertions.assertThat(res.getEmail()).isEqualTo(newEmail);
+        Assertions.assertThat(res.getBio()).isEqualTo(bio);
+        Assertions.assertThat(res.getImg()).isEqualTo(null);
+
     }
 
 }

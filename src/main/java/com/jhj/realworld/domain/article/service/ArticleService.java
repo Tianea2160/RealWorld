@@ -4,10 +4,14 @@ import com.jhj.realworld.domain.article.Article;
 import com.jhj.realworld.domain.article.controller.ArticleSearch;
 import com.jhj.realworld.domain.article.dto.ArticleUpdateDto;
 import com.jhj.realworld.domain.article.repository.ArticleRepository;
+import com.jhj.realworld.domain.articletag.ArticleTag;
+import com.jhj.realworld.domain.articletag.repository.ArticleTagRepository;
 import com.jhj.realworld.domain.member.Member;
 import com.jhj.realworld.domain.member.repository.MemberRepository;
 import com.jhj.realworld.domain.article.dto.ArticleCreateDto;
 import com.jhj.realworld.domain.article.dto.ArticleDto;
+import com.jhj.realworld.domain.tag.Tag;
+import com.jhj.realworld.domain.tag.repository.TagRepository;
 import com.jhj.realworld.global.exception.NotExistArticleException;
 import com.jhj.realworld.global.exception.NotExistMemberException;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,6 +29,8 @@ public class ArticleService {
 
     private final ArticleRepository articleRepository;
     private final MemberRepository memberRepository;
+    private final ArticleTagRepository articleTagRepository;
+    private final TagRepository tagRepository;
 
     @Transactional(readOnly = true)
     public List<ArticleDto> findAll(ArticleSearch articleSearch) {
@@ -44,6 +51,7 @@ public class ArticleService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public ArticleDto findBySlug(String slug) {
         Article article = articleRepository.findArticleBySlug(slug)
                 .orElseThrow(() -> new NotExistArticleException("해당 게시글은 없습니다."));
@@ -57,7 +65,22 @@ public class ArticleService {
 
         Article article = ArticleCreateDto.from(createDto);
         article.setMember(login);
-        return articleRepository.create(article);
+
+        Long articleId = articleRepository.create(article);
+
+        //tag 지정
+        for (String tagName : createDto.getTagList()) {
+            Optional<Tag> tagOrNull = tagRepository.findTagByContent(tagName);
+
+            ArticleTag articleTag;
+            Tag tag;
+            tag = tagOrNull.orElseGet(() -> new Tag(tagName));
+            articleTag = ArticleTag.create(article, tag);
+            articleTagRepository.save(articleTag);
+            article.getArticleTags().add(articleTag);
+        }
+
+        return articleId;
     }
 
     public Long update(Long loginId, String slug, ArticleUpdateDto updateDto) {
@@ -67,7 +90,7 @@ public class ArticleService {
         if (!article.getMember().getId().equals(loginId))
             throw new IllegalStateException("해당 게시글에 대한 수정 권한이 없습니다.");
 
-            article.update(updateDto);
+        article.update(updateDto);
         return article.getId();
     }
 
