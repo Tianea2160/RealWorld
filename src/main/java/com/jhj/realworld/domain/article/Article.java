@@ -43,8 +43,8 @@ public class Article extends TimeExtend {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "comment_id")//단방향 연결
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "article")
+    //@JoinColumn(name = "comment_id")//단방향 연결
     private List<Comment> comments = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "article")
