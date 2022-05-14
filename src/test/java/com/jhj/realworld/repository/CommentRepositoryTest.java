@@ -37,7 +37,7 @@ class CommentRepositoryTest {
                 .password(token)
                 .role(Role.USER)
                 .build();
-        em.persist(member); //member create
+        em.persist(member); //member save
 
         String slug = "hello world!";
         String description = "this is testing description";
@@ -49,12 +49,12 @@ class CommentRepositoryTest {
                 .member(member)
                 .build();
 
-        em.persist(article);
+        em.persist(article);// article save
 
         String commentBody = "test comment";
 
         for(int i = 0; i<5; i++){
-            Comment comment = new Comment(commentBody, member);
+            Comment comment = new Comment(commentBody, member, null);
             em.persist(comment);
             article.getComments().add(comment);
         }
