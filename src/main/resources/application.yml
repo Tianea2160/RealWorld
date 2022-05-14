@@ -15,3 +15,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+  # swagger
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher

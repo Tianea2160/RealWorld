@@ -32,6 +32,9 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
     implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.0'
     implementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+
+    //swagger
+    implementation "io.springfox:springfox-boot-starter:3.0.0"
 }
 
 test {
