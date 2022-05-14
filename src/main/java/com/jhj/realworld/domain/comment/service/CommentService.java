@@ -4,14 +4,18 @@ import com.jhj.realworld.domain.article.Article;
 import com.jhj.realworld.domain.article.repository.ArticleRepository;
 import com.jhj.realworld.domain.comment.Comment;
 import com.jhj.realworld.domain.comment.dto.CommentCreateDto;
+import com.jhj.realworld.domain.comment.dto.CommentResponseDto;
 import com.jhj.realworld.domain.comment.repository.CommentRepository;
 import com.jhj.realworld.domain.member.Member;
 import com.jhj.realworld.domain.member.repository.MemberRepository;
 import com.jhj.realworld.global.exception.NotExistArticleException;
+import com.jhj.realworld.global.exception.NotExistCommentException;
 import com.jhj.realworld.global.exception.NotExistMemberException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -33,5 +37,37 @@ public class CommentService {
         Comment comment = Comment.from(dto, login, article);
         commentRepository.save(comment);// 저장
         article.getComments().add(comment);// 주인인 아닌 곳에 추가
+    }
+
+    public List<CommentResponseDto> findAll(String slug, String loginMemberName) {
+        Member login = memberRepository
+                .findMemberByName(loginMemberName)
+                .orElseThrow(() -> new NotExistMemberException("해당 사용자는 없습니다."));
+
+        Article article = articleRepository
+                .findArticleBySlug(slug)
+                .orElseThrow(() -> new NotExistArticleException("해당하는 게시글이 없습니다."));
+
+        return article.getComments().stream()
+                .map(comment -> {
+                    CommentResponseDto dto = CommentResponseDto.of(comment);
+                    // 로그인한 사용자가 댓글 작성자를 팔로우 했는지 확인하는 과정
+                    boolean isFollow = login.getFollowers().contains(comment.getAuthor());
+                    dto.getAuthor().setFollowing(isFollow);
+                    return dto;
+                }).collect(Collectors.toList());
+    }
+
+    public void delete(String slug, Long commentId) {
+        Article article = articleRepository
+                .findArticleBySlug(slug)
+                .orElseThrow(() -> new NotExistArticleException("해당하는 게시글이 없습니다."));
+
+        Comment comment = commentRepository
+                .findCommentById(commentId)
+                .orElseThrow(() -> new NotExistCommentException("해당하는 댓글이 없습니다."));
+
+        commentRepository.delete(comment);
+        article.getComments().remove(comment);
     }
 }
