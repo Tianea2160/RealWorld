@@ -14,12 +14,13 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Getter
 @Entity
 @NoArgsConstructor
-public class Article extends TimeExtend {
+public class Article extends TimeExtend implements Comparator<Article> {
     @Id @GeneratedValue
     @Column(name = "article_id")
     private Long id;
@@ -78,5 +79,10 @@ public class Article extends TimeExtend {
         if(dto.getDescription()!=null){
             this.description = dto.getDescription();
         }
+    }
+
+    @Override
+    public int compare(Article a1, Article a2) {
+        return a1.slug.compareTo(a2.slug);
     }
 }
