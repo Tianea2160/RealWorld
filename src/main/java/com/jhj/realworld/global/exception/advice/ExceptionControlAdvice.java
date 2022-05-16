@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.persistence.NoResultException;
 import java.time.LocalDateTime;
 
 @RestControllerAdvice
@@ -58,4 +59,18 @@ public class ExceptionControlAdvice {
         );
         return new ResponseEntity<>(apiExceptionStatus, httpStatus);
     }
+
+    @ExceptionHandler(value = {NoResultException.class})
+    public ResponseEntity<Object> notExistArticleException(NoResultException e) {
+        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+
+        ApiExceptionStatus apiExceptionStatus = new ApiExceptionStatus(
+                ExceptionMessage.NO_RESULT,
+                httpStatus,
+                LocalDateTime.now()
+        );
+        return new ResponseEntity<>(apiExceptionStatus, httpStatus);
+    }
+
+
 }
