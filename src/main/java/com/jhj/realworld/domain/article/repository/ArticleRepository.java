@@ -5,6 +5,7 @@ import com.jhj.realworld.domain.article.controller.ArticleSearch;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
@@ -16,15 +17,23 @@ public class ArticleRepository {
     private EntityManager em;
 
     public List<Article> findAll(ArticleSearch articleSearch) {
-        return em.createQuery("select m from Article m", Article.class)
-                .getResultList();
+        try {
+            return em.createQuery("select m from Article m", Article.class)
+                    .getResultList();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     public Optional<Article> findArticleBySlug(String slug) {
-        Article article = em.createQuery("select m from Article m where m.slug = :slug", Article.class)
-                .setParameter("slug", slug)
-                .getSingleResult();
-        return Optional.ofNullable(article);
+        try {
+            Article article = em.createQuery("select m from Article m where m.slug = :slug", Article.class)
+                    .setParameter("slug", slug)
+                    .getSingleResult();
+            return Optional.ofNullable(article);
+        }catch (NoResultException e){
+            return Optional.empty();
+        }
     }
 
     public Long create(Article article) {
@@ -33,7 +42,11 @@ public class ArticleRepository {
     }
 
     public Optional<Article> findArticleById(Long loginId) {
-        return Optional.ofNullable(em.find(Article.class, loginId));
+        try {
+            return Optional.ofNullable(em.find(Article.class, loginId));
+        }catch(NoResultException e){
+            return Optional.empty();
+        }
     }
 
     public void delete(Article article) {
