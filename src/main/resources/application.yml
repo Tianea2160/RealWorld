@@ -1,3 +1,6 @@
+server:
+  port: 80
+
 spring:
   profiles:
     active: mysql
@@ -23,4 +26,5 @@ spring:
 #
 #  h2:
 #    console:
+
 #      enabled: true

@@ -40,6 +40,10 @@ dependencies {
     implementation 'mysql:mysql-connector-java'
 }
 
+jar {
+    enabled = false
+}
+
 test {
     useJUnitPlatform()
 }

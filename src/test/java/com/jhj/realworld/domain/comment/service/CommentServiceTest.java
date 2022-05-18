@@ -84,7 +84,7 @@ class CommentServiceTest {
         list = commentService.findAll(slug, name);
         assertThat(list.size()).isEqualTo(0);// 아무것도 없어야한다.
 
-        assertThat(commentRepository.findById(commentId).isEmpty()).isEqualTo(true);
+        assertThat(commentRepository.findCommentById(commentId).isEmpty()).isEqualTo(true);
 
     }
 }
