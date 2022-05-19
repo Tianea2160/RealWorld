@@ -16,7 +16,7 @@ public class CommentRepository {
 
     public Optional<Comment> findCommentById(Long id){
         try{
-            Comment res = em.createQuery("select m from Comment m where Comment.id = :id", Comment.class)
+            Comment res = em.createQuery("select m from Comment m where m.id = :id", Comment.class)
                     .setParameter("id", id)
                     .getSingleResult();
             return Optional.of(res);

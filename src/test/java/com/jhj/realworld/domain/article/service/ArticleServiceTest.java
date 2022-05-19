@@ -66,7 +66,7 @@ class ArticleServiceTest {
                     .email("" + i + i + i + "@example.com")
                     .role(Role.USER)
                     .build();
-            memberRepository.save(member);
+            em.persist(member);
 
             for(int j  = 0; j<5; j++){
                 String content = temp + j;
@@ -82,10 +82,6 @@ class ArticleServiceTest {
             }
         }
     }
-
-
-
-
 
     @Test
     void 게시물_하나_만들기() throws Exception {
@@ -156,7 +152,7 @@ class ArticleServiceTest {
         //feeds.forEach(System.out::println);
 
         articleService.favorite("BBB2", login.getName());
-        assertThat(login.getFollowers().get(2).getName()).isEqualTo("BBB2");
+        assertThat(login.getFollowers().get(1).getName()).isEqualTo("CCC");
         //assertThat(login.getFollowers().get(2)()).isEqualTo("BBB2");
         
         articleService.unfavorite("BBB2", login.getName());
@@ -185,9 +181,5 @@ class ArticleServiceTest {
 
         List<ArticleDto> feeds = articleService.findFeeds(login);
         feeds.forEach(System.out::println);
-
-
-
-
     }
 }

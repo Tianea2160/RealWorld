@@ -11,7 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Getter
-@Entity
+@Entity(name = "tag")
 @NoArgsConstructor
 public class Tag {
     @Id @GeneratedValue

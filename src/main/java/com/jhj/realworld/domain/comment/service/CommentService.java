@@ -67,7 +67,7 @@ public class CommentService {
                 .findCommentById(commentId)
                 .orElseThrow(() -> new NotExistCommentException("해당하는 댓글이 없습니다."));
 
-        commentRepository.delete(comment);
         article.getComments().remove(comment);
+        commentRepository.delete(comment);
     }
 }

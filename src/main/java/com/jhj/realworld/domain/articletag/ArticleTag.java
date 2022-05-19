@@ -10,7 +10,7 @@ import javax.persistence.*;
 
 
 @Getter
-@Entity
+@Entity(name = "article_tag")
 public class ArticleTag {
     @Id @GeneratedValue
     @Column(name = "article_tag_id")

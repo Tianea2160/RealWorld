@@ -3,5 +3,7 @@ spring:
     username: root
     password: rhleh2160
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://rw_db:3306/noticeboard?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://host.docker.internal:3306/noticeboard?serverTimezone=Asia/Seoul
+    #url: jdbc:mysql://localhost:3306/noticeboard?serverTimezone=Asia/Seoul
+
 

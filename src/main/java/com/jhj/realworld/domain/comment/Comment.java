@@ -17,7 +17,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment extends TimeExtend {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id")
     private Long id;
 
@@ -40,7 +40,11 @@ public class Comment extends TimeExtend {
     }
 
     public static Comment from(CommentCreateDto dto, Member author, Article article) {
-        return new Comment(dto.getBody(), author, article);
+        return  Comment.builder()
+                .body(dto.getBody())
+                .author(author)
+                .article(article)
+                .build();
     }
 
     public void update(String body) {

@@ -18,7 +18,7 @@ import java.util.Comparator;
 import java.util.List;
 
 @Getter
-@Entity
+@Entity(name = "article")
 @NoArgsConstructor
 public class Article extends TimeExtend implements Comparator<Article> {
     @Id @GeneratedValue
