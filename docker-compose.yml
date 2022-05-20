@@ -1,26 +1,36 @@
 version: '3.1'
 
 services:
-
   db:
+    container_name: rw_db
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: rhleh2160
       MYSQL_DATABASE: noticeboard
-  adminer:
-    image: adminer
-    restart: always
+      TZ: Asia/Seoul
+
+    platform: linux/amd64
     ports:
       - "3306:3306"
+    networks:
+      - "realworld-mysql"
 
   web:
+    container_name: rw_web
     image: realworld
     ports:
       - "8080:8080"
     networks:
       - "realworld-mysql"
+    build:
+      dockerfile: Dockerfile
+      context: .
+    platform: linux/amd64
+    depends_on:
+      - "rw_db"
+
 networks:
   realworld-mysql:
     driver: bridge
