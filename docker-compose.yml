@@ -30,6 +30,7 @@ services:
     platform: linux/amd64
     depends_on:
       - "rw_db"
+    restart: on-failure
 
 networks:
   realworld-mysql:
